@@ -37,7 +37,15 @@ public:
 
 int main() {
     Bakery toko;
+    
+cout<<"\n==== LIST HARGA ROTI==="<<endl;
+cout<<"\n ROTI KEJU = 12000"<<endl;
+cout<<"\n ROTI TAWAR = 9000"<<endl;
+cout<<"\n ROTI COKLAT = 11000"<<endl;
+cout<<"\n======================="<<endl;
+cout<<endl;
 
+    
     toko.input();
     toko.proses();
     toko.output();
