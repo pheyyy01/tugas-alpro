@@ -3,14 +3,16 @@ using namespace std;
 
 class Bakery {
 private:
-    int pilihan, jumlah, hargaSatuan, totalHarga;
-    int totalSemua = 0;
+    int pilihan, jumlah, hargaSatuan;
+    int totalHarga, totalSemua = 0;
+
     string namaRoti;
-    char lagi;
 
 public:
 
+    // MENU
     void menu() {
+
         cout << "\n===== TOKO BAKERY =====" << endl;
         cout << "1. Roti Keju   = 12000" << endl;
         cout << "2. Roti Tawar  = 9000" << endl;
@@ -21,6 +23,7 @@ public:
 
     // INPUT
     void input() {
+
         cout << "\nPilih Roti : ";
         cin >> pilihan;
 
@@ -28,6 +31,18 @@ public:
             cout << "Jumlah Beli : ";
             cin >> jumlah;
         }
+    }
+
+    // FUNGSI REKURSIF
+    int hitungTotal(int harga, int jumlah) {
+
+        // BASE CASE
+        if (jumlah == 0) {
+            return 0;
+        }
+
+        // REKURSIF
+        return harga + hitungTotal(harga, jumlah - 1);
     }
 
     // PROSES
@@ -64,9 +79,10 @@ public:
                 return true;
         }
 
-        totalHarga = jumlah * hargaSatuan;
+        // MEMANGGIL REKURSIF
+        totalHarga = hitungTotal(hargaSatuan, jumlah);
 
-        // MENAMBAHKAN TOTAL SEMUA BELANJA
+        // TOTAL SEMUA BELANJA
         totalSemua += totalHarga;
 
         return true;
@@ -79,12 +95,11 @@ public:
 
             cout << "\n===== STRUK PEMBELIAN =====" << endl;
             cout << "Nama Roti    : " << namaRoti << endl;
-            cout << "Jumlah Beli  : " << jumlah << endl;
+            cout << "Jumlah Beli  : " << jumlah << " biji" << endl;
             cout << "Harga Satuan : " << hargaSatuan << endl;
             cout << "Total Harga  : " << totalHarga << endl;
 
-            // TOTAL KESELURUHAN
-            cout << "---------------------------" << endl;
+            cout << "-----------------------------" << endl;
             cout << "Total Semua  : " << totalSemua << endl;
         }
     }
@@ -93,16 +108,20 @@ public:
 int main() {
 
     Bakery toko;
+
     bool jalan = true;
 
-    // DO WHILE
+    // ITERATIF (DO WHILE)
     do {
 
         toko.menu();
         toko.input();
+
         jalan = toko.proses();
+
         toko.output();
 
     } while (jalan);
 
     return 0;
+}
